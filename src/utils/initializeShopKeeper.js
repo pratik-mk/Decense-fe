@@ -14,12 +14,7 @@ import { DECENSE_SHOPKEEPER_STATE } from "./utils";
 
 const BN = require("bn.js");
 
-export const initializeSK = async (skeeper) => {
-
-  // get this in arg
-  const market_valuation = 10000;
-  const supply = 10000;
-
+export const initializeSK = async (market_valuation, supply, skeeper) => {
   const platform_state_account = await PublicKey.createWithSeed(
     adminId,
     "DECENSE PLATFORM",
@@ -96,14 +91,12 @@ export const initializeSK = async (skeeper) => {
 
   console.log("tx:", tx);
 
-
-
   ///////////////////////////////////////////////////////////////////////////////////////////////
   ////// get shopkeepers data
 
   const sk_state = await connection.getAccountInfo(skeeper_state);
 
-  console.log(sk_state)
+  console.log(sk_state);
 
   const decoded = DECENSE_SHOPKEEPER_STATE.decode(sk_state.data);
 

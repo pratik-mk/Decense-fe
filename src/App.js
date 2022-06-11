@@ -1,4 +1,5 @@
 import React from "react";
+import Container from "@mui/material/Container";
 import PlatformIntialize from "./components/PlatformIntialize";
 import ShopkeeperIntialize from "./components/ShopkeeperIntialize";
 import Exchange from "./components/Exchange";
@@ -9,11 +10,13 @@ import { WalletProvider } from "./context/walletContext";
 const App = () => {
   return (
     <WalletProvider>
-      <ConnectWallet />
-      <PlatformIntialize />
-      <ShopkeeperIntialize />
-      <Exchange />
-      <Transfer />
+      <Container>
+        <ConnectWallet />
+        <PlatformIntialize />
+        <ShopkeeperIntialize />
+        <Exchange />
+        <Transfer />
+      </Container>
     </WalletProvider>
   );
 };
