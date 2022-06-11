@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:5000";
+const baseUrl = "https://decense-backend.herokuapp.com";
 
 export const addNewToken = (data) => {
   return new Promise(async (resolve, reject) => {
