@@ -1,7 +1,7 @@
 import React from "react";
 import { useWallet } from "../context/walletContext";
 import { PublicKey } from "@solana/web3.js";
-import { sendRecieveTokenIx } from "../utils/sendRecieveToken";
+import { sendRecieveTokenIx } from "../utils/sendOrRecieveTokens";
 
 const Transfer = () => {
   const { pubKey } = useWallet();
