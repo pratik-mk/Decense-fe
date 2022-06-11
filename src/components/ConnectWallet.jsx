@@ -7,7 +7,7 @@ const ConnectWallet = () => {
   const getConnectedWallet = async () => {
     const provider = await window.solana;
     if (provider) {
-      setPubKey(provider.publicKey);
+      setPubKey(provider.publicKey.toString());
       localStorage.setItem("pubKey", provider.pubKey);
     } else console.log("Try to connect again");
   };
