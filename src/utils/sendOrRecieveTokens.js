@@ -14,12 +14,17 @@ import { DECENSE_SHOPKEEPER_STATE } from "./utils";
 
 const BN = require("bn.js");
 
-export const sendRecieveTokenIx = async (skeeper, user) => {
+export const sendRecieveTokenIx = async (
+  actionARGS,
+  amountARGS,
+  skeeper,
+  user
+) => {
   // get this in arg
 
   // action = 0 is for sending tokens to contract; action = 1 is for recieving tokens from contract
-  const action = 0;
-  const amount = 0.1 * 10000;
+  const action = actionARGS;
+  const amount = amountARGS * 10000;
 
   const mintId = await PublicKey.createWithSeed(
     skeeper,

@@ -14,10 +14,15 @@ import { DECENSE_SHOPKEEPER_STATE } from "./utils";
 
 const BN = require("bn.js");
 
-export const exchangeIx = async (skeeper, user) => {
+export const exchangeIx = async (
+  ask_priceARGS,
+  quantityARGS,
+  skeeper,
+  user
+) => {
   // get this in arg
-  const ask_price = 1 * 1000000000;
-  const quantity = 0.3 * 10000;
+  const ask_price = ask_priceARGS * 1000000000;
+  const quantity = quantityARGS * 10000;
 
   const mintId = await PublicKey.createWithSeed(
     skeeper,
@@ -25,7 +30,7 @@ export const exchangeIx = async (skeeper, user) => {
     TOKEN_PROGRAM_ID
   );
 
-  console.log("Mint", mintId.toString())
+  console.log("Mint", mintId.toString());
 
   const skeeper_state = await PublicKey.createWithSeed(
     skeeper,
@@ -96,13 +101,13 @@ export const exchangeIx = async (skeeper, user) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   ////// get shopkeepers data
 
-//   const sk_state = await connection.getAccountInfo(skeeper_state);
+  //   const sk_state = await connection.getAccountInfo(skeeper_state);
 
-//   console.log(sk_state);
+  //   console.log(sk_state);
 
-//   const decoded = DECENSE_SHOPKEEPER_STATE.decode(sk_state.data);
+  //   const decoded = DECENSE_SHOPKEEPER_STATE.decode(sk_state.data);
 
-//   console.log(decoded);
+  //   console.log(decoded);
 
   ////// to convert byte array pubkey to string => .toString()
   ///////////////////////////////////////////////////////////////////////////////////////////////
