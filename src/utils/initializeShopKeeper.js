@@ -14,6 +14,7 @@ import { DECENSE_SHOPKEEPER_STATE } from "./utils";
 
 const BN = require("bn.js");
 
+// skeeper is shopkeeper_pubkey
 export const initializeSK = async (market_valuation, supply, skeeper) => {
   const platform_state_account = await PublicKey.createWithSeed(
     adminId,
@@ -21,12 +22,14 @@ export const initializeSK = async (market_valuation, supply, skeeper) => {
     programId
   );
 
+  // mint_id tostring
   const mintId = await PublicKey.createWithSeed(
     skeeper,
     "SHOPKEEPER MINT",
     TOKEN_PROGRAM_ID
   );
 
+  //skeeper_state
   const skeeper_state = await PublicKey.createWithSeed(
     skeeper,
     "DECENSE USER",
@@ -81,6 +84,7 @@ export const initializeSK = async (market_valuation, supply, skeeper) => {
     ),
   });
 
+  //try catch block
   const tx = await sendTxUsingExternalSignature(
     [initSKIx],
     connection,
@@ -94,13 +98,13 @@ export const initializeSK = async (market_valuation, supply, skeeper) => {
   ///////////////////////////////////////////////////////////////////////////////////////////////
   ////// get shopkeepers data
 
-  const sk_state = await connection.getAccountInfo(skeeper_state);
+  // const sk_state = await connection.getAccountInfo(skeeper_state);
 
-  console.log(sk_state);
+  // console.log(sk_state);
 
-  const decoded = DECENSE_SHOPKEEPER_STATE.decode(sk_state.data);
+  // const decoded = DECENSE_SHOPKEEPER_STATE.decode(sk_state.data);
 
-  console.log(decoded);
+  // console.log(decoded);
 
   ////// to convert byte array pubkey to string => .toString()
   ///////////////////////////////////////////////////////////////////////////////////////////////
