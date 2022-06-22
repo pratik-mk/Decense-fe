@@ -1,3 +1,4 @@
+import { Button } from "@mui/material";
 import React from "react";
 import { useWallet } from "../context/walletContext";
 
@@ -7,7 +8,7 @@ const ConnectWallet = () => {
   const getConnectedWallet = async () => {
     const provider = await window.solana;
     if (provider) {
-      setPubKey(provider.publicKey.toString());
+      setPubKey(provider.publicKey);
       localStorage.setItem("pubKey", provider.pubKey);
     } else console.log("Try to connect again");
   };
@@ -33,8 +34,14 @@ const ConnectWallet = () => {
       <hr />
       <h1>Connect Wallet Component</h1>
       <h2>Hey: {pubKey ? pubKey.toString() : ""}</h2>
-      <button onClick={connectWallet}>Connect Here!</button>
-      <button onClick={disconnectWallet}>Disconnect Here!</button>
+      <Button variant="contained" onClick={connectWallet}>
+        Connect Here!
+      </Button>
+      <br />
+      <br />
+      <Button variant="contained" onClick={disconnectWallet}>
+        Disconnect Here!
+      </Button>
       <hr />
     </div>
   );

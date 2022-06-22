@@ -1,6 +1,7 @@
 import React from "react";
 import { initializePlatform } from "../utils/initializePlatform";
 import { useWallet } from "../context/walletContext";
+import { Button } from "@mui/material";
 
 const PlatformIntialize = () => {
   const { pubKey } = useWallet();
@@ -8,9 +9,9 @@ const PlatformIntialize = () => {
     <div>
       <hr />
       <h1>PlatformIntialize Component</h1>
-      <button onClick={() => initializePlatform(pubKey)}>
+      <Button variant="contained" onClick={() => initializePlatform(pubKey)}>
         Initialize Platform
-      </button>
+      </Button>
       <hr />
     </div>
   );

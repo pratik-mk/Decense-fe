@@ -7,32 +7,30 @@ import { getTokenByName } from "../services/api";
 
 const Transfer = () => {
   const { pubKey } = useWallet();
-  const [skDetails, setSkDetails] = useState({
-    skName: "",
-    skAddress: "",
-  });
 
   const [transferValues, setTransferValues] = useState({
     action: "",
     amount: "",
+    skPublicKey: "",
+    userPublicKey: "",
   });
 
-  const getSKAddress = async (skName) => {
-    try {
-      //make API call
-      const res = await getTokenByName(skName);
-      setSkDetails({ ...skDetails, skAddress: res.address });
-    } catch (e) {
-      console.log(e, "exchange componennt API error");
-    }
-  };
+  // const getSKAddress = async (skName) => {
+  //   try {
+  //     //make API call
+  //     const res = await getTokenByName(skName);
+  //     setSkDetails({ ...skDetails, skAddress: res.address });
+  //   } catch (e) {
+  //     console.log(e, "exchange componennt API error");
+  //   }
+  // };
 
   const handleTransfer = () => {
     const transferTxRes = sendRecieveTokenIx(
       transferValues.action,
       transferValues.amount,
-      new PublicKey(skDetails.skAddress),
-      pubKey
+      new PublicKey(transferValues.skPublicKey),
+      new PublicKey(transferValues.userPublicKey)
     );
     console.log(transferTxRes, "transferTx");
   };
@@ -44,22 +42,36 @@ const Transfer = () => {
       <h3>GET SHOPKEEPER PUBLIC KEY</h3>
       <TextField
         type="text"
-        label="Shopkeeper Name"
-        onChange={(e) => setSkDetails({ ...skDetails, skName: e.target.value })}
+        label="Shopkeeper Address"
+        onChange={(e) =>
+          setTransferValues({
+            ...transferValues,
+            skPublicKey: e.target.value,
+          })
+        }
       />
-      <Button
+      {/* <Button
         variant="contained"
         onClick={() => getSKAddress(skDetails.skName)}
       >
         Get SK Address
-      </Button>
+      </Button> */}
 
       <br />
       <Typography variant="h5">
         ACTION 0 = is for sending tokens to contrac, ACTION 1 = is for recieving
         tokens from contract
       </Typography>
-      <TextField type="text" label="SK Address" value={skDetails.skAddress} />
+      <TextField
+        type="text"
+        label="User Address"
+        onChange={(e) =>
+          setTransferValues({
+            ...transferValues,
+            userPublicKey: e.target.value,
+          })
+        }
+      />
       <TextField
         type="number"
         label="Amount"
